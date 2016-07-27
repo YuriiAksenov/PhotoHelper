@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PhotoHelper.ViewModel
 {
-    class RenameInterfaceViewModel
+    public  class RenameInterfaceViewModel
     {
     }
 }
