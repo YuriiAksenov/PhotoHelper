@@ -4,14 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhotoHelper
+namespace PhotoHelper.ViewModel
 {
-    internal class Program
+    class RenameInterfaceViewModel
     {
-        [STAThread]
-        public void Main(string[] args)
-        {
-
-        }
     }
 }
