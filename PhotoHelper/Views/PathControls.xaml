@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="PhotoHelper.Views.PathControls"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PhotoHelper.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Vertical">
+
+            <TextBox x:Name="tbInputWay" Text="Way from" Margin="5" MinWidth="150"/>
+
+            <Button Content="Откуда" Margin="5" HorizontalAlignment="Left" Padding="5,1,5,1" Click="Button_Click"/>
+
+            <TextBox x:Name="tbOutputWay" Text="Way To" Margin="5" MinWidth="150"/>
+
+            <Button Content="Куда" Margin="5" Padding="5,1,5,1"/>
+
+            <ListView ItemsSource="{Binding Items}" Margin="5" MinWidth="150" VerticalAlignment="Stretch" MinHeight="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}" Margin="5"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Image Source="{Binding Items}" Margin="5" MinHeight="50"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

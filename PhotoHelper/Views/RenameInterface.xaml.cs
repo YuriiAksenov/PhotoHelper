@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PhotoHelper
+namespace PhotoHelper.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для RenameInterface.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RenameInterface : UserControl
     {
-        public MainWindow()
+        public RenameInterface()
         {
             InitializeComponent();
-            
         }
-
-       
-
-        
     }
 }
