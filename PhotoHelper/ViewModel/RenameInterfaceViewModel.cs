@@ -8,5 +8,9 @@ namespace PhotoHelper.ViewModel
 {
     public  class RenameInterfaceViewModel
     {
+        public RenameInterfaceViewModel()
+        {
+
+        }
     }
 }

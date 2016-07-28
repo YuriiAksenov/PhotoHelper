@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace PhotoHelper.ViewModel
 {
-    public class PathControlBase : DependencyObject
+    public class PathControlsViewModel : DependencyObject
     {
         /// <summary>
         /// Команда открытия диалогового окна
@@ -19,7 +19,7 @@ namespace PhotoHelper.ViewModel
         public ICommand OpenFolderDialogCommand { get; set; }
         public bool IsExist { get; set; }
 
-        public PathControlBase()
+        public PathControlsViewModel()
         {
             OpenFolderDialogCommand = new RelayCommand(this.OpenFolderDialog);
         }
@@ -32,11 +32,11 @@ namespace PhotoHelper.ViewModel
 
         // Using a DependencyProperty as the backing store for FoldetPath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FolderPathProperty =
-            DependencyProperty.Register("FolderPath", typeof(string), typeof(PathControlBase), new PropertyMetadata("",FolderPath_Changed));
+            DependencyProperty.Register("FolderPath", typeof(string), typeof(PathControlsViewModel), new PropertyMetadata("",FolderPath_Changed));
 
         private static void FolderPath_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var current = d as PathControlBase;
+            var current = d as PathControlsFromViewModel;
             if (current != null)
             {
                 current.IsExist = false;
