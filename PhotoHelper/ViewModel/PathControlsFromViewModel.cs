@@ -33,8 +33,11 @@ namespace PhotoHelper.ViewModel
         private static void SetectedFile_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var t = d as PathControlsFromViewModel;
-            if (t != null)
-                MessageBox.Show(t.SelectedFile.oldPath+"  "+t.SelectedFile.fileName);
+            if (t != null &&  t.SelectedFile!=null)
+            {
+                SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
+                MessageBox.Show(string.IsNullOrWhiteSpace(t.SelectedFile.oldPath) ? "Не выбран" : t.SelectedFile.oldPath + "  " + (string.IsNullOrWhiteSpace(t.SelectedFile.fileName)? "Не выбран" : t.SelectedFile.fileName));
+            }
         }
 
         public ICommand OpenFolderDialogCommand { get; set; }

@@ -20,10 +20,10 @@ namespace PhotoHelper
         static void Main(string[] args)
         {
             MenuViewModel menuViewModel = new MenuViewModel();
-            PathControlsFromViewModel pathControlsViewModel = new PathControlsFromViewModel();
-            RenameInterfaceViewModel renameInterfaceViewModel = new RenameInterfaceViewModel();
+            PathControlsFromViewModel pathControlsFromViewModel = new PathControlsFromViewModel();
+            RenameInterfaceViewModel renameInterfaceViewModel = new RenameInterfaceViewModel(pathControlsFromViewModel);
 
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(menuViewModel,pathControlsViewModel,renameInterfaceViewModel);
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(menuViewModel,pathControlsFromViewModel,renameInterfaceViewModel);
 
             MainWindow mainWindow = new MainWindow(mainWindowViewModel);
             mainWindow.ShowDialog();
