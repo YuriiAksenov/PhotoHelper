@@ -19,8 +19,12 @@ namespace PhotoHelper
         [STAThread]
         static void Main(string[] args)
         {
-            
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
+            MenuViewModel menuViewModel = new MenuViewModel();
+            PathControlsFromViewModel pathControlsViewModel = new PathControlsFromViewModel();
+            RenameInterfaceViewModel renameInterfaceViewModel = new RenameInterfaceViewModel();
+
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(menuViewModel,pathControlsViewModel,renameInterfaceViewModel);
+
             MainWindow mainWindow = new MainWindow(mainWindowViewModel);
             mainWindow.ShowDialog();
            

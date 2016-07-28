@@ -15,7 +15,7 @@ namespace PhotoHelper
     {
         public MainWindow(MainWindowViewModel MainWindowViewModel)
         {
-            //DataContext = MainWindowViewModel;
+            DataContext = MainWindowViewModel;
             InitializeComponent();
             
         }

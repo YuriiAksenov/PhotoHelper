@@ -6,11 +6,5 @@ using System.Threading.Tasks;
 
 namespace PhotoHelper.Model
 {
-    class Class1
-    {
-        public void op()
-        {
-            
-        }
-    }
+    
 }

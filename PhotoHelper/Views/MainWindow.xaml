@@ -1,4 +1,4 @@
-﻿<Window x:Class="PhotoHelper.MainWindow"
+﻿<Window x:Class="PhotoHelper.MainWindow" WindowStartupLocation="CenterScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -27,7 +27,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0">
-            <controls:PathControls DataContext="{Binding Path=PathControlsViewModel}"/>
+            <controls:PathControls DataContext="{Binding Path=PathControlsFromViewModel}"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1">

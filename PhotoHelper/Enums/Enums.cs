@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PhotoHelper.ViewModel
+namespace PhotoHelper.Enums
 {
-    public  class RenameInterfaceViewModel
-    {
-    }
+   
 }
