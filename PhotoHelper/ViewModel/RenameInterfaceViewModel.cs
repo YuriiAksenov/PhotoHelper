@@ -8,9 +8,11 @@ namespace PhotoHelper.ViewModel
 {
     public  class RenameInterfaceViewModel
     {
-        public RenameInterfaceViewModel()
-        {
+        private PathControlsFromViewModel _pathControlsFromViewModel;
 
+        public RenameInterfaceViewModel(PathControlsFromViewModel pathControlsFromViewModel)
+        {
+            this._pathControlsFromViewModel = pathControlsFromViewModel;
         }
     }
 }
