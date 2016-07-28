@@ -10,16 +10,16 @@ namespace PhotoHelper.ViewModel
     public class MainWindowViewModel
     {
         public MenuViewModel MenuViewModel { get;}
-        public PathControlsViewModel PathControlsViewModel { get;}
+        public PathControlsFromViewModel PathControlsFromViewModel { get;}
         public RenameInterfaceViewModel RenameInterfaceViewModel { get;}
 
         public MainWindowViewModel(
             MenuViewModel menuViewModel, 
-            PathControlsViewModel pathControlsViewModel,
+            PathControlsFromViewModel pathControlsViewModel,
             RenameInterfaceViewModel renameInterfaceViewModel)
         {
             this.MenuViewModel = menuViewModel;
-            this.PathControlsViewModel = pathControlsViewModel;
+            this.PathControlsFromViewModel = pathControlsViewModel;
             this.RenameInterfaceViewModel = renameInterfaceViewModel;
 
             MessageBox.Show("Привет");

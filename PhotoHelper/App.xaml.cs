@@ -20,7 +20,7 @@ namespace PhotoHelper
         static void Main(string[] args)
         {
             MenuViewModel menuViewModel = new MenuViewModel();
-            PathControlsViewModel pathControlsViewModel = new PathControlsViewModel();
+            PathControlsFromViewModel pathControlsViewModel = new PathControlsFromViewModel();
             RenameInterfaceViewModel renameInterfaceViewModel = new RenameInterfaceViewModel();
 
             MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(menuViewModel,pathControlsViewModel,renameInterfaceViewModel);

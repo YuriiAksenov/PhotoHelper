@@ -27,7 +27,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0">
-            <controls:PathControls DataContext="{Binding Path=PathControlsViewModel}"/>
+            <controls:PathControls DataContext="{Binding Path=PathControlsFromViewModel}"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1">

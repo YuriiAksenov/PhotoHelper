@@ -11,10 +11,10 @@
     <Grid>
         <StackPanel  Orientation="Vertical">
 
-            <TextBox x:Name="tbFromPath" Text="{Binding Path=PathFrom, Mode=TwoWay}"  Margin="5" MinWidth="150"/>
+            <TextBox x:Name="tbFromPath" Text="{Binding Path=FolderPath, Mode=TwoWay}"  Margin="5" MinWidth="150"/>
 
             <Button Content="Выбрать папку" Margin="5" HorizontalAlignment="Left" Padding="5,1,5,1" 
-                    Command="{Binding OpenFolderDialogFromCommand}"/>
+                    Command="{Binding OpenFolderDialogCommand}"/>
 
             <TextBox x:Name="tbToPath" Text="{Binding Path=PathTo, Mode=TwoWay}" Margin="5" MinWidth="150"/>
 
@@ -24,11 +24,11 @@
             <ListView ItemsSource="{Binding Items}" Margin="5" MinWidth="150" VerticalAlignment="Stretch" MinHeight="100">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" Margin="5"/>
+                        <TextBlock Text="{Binding FoldetPath}" Margin="5"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Image Source="{Binding Items}" Margin="5" MinHeight="50"/>
+            
         </StackPanel>
     </Grid>
 </UserControl>
