@@ -31,7 +31,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1">
-            <controls:RenameInterface />
+            <controls:RenameInterface DataContext="{Binding Path=RenameInterfaceViewModel}"/>
         </Grid>
 
         

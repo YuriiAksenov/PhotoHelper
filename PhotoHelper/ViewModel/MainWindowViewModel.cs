@@ -12,13 +12,13 @@ namespace PhotoHelper.ViewModel
         public MenuViewModel MenuViewModel { get;}
         public PathControlsFromViewModel PathControlsFromViewModel { get;}
         public RenameInterfaceViewModel RenameInterfaceViewModel { get;}
-        public SelectedItem SelectedItem { get; }
+        public CurrentFile SelectedItem { get; }
 
         public MainWindowViewModel(
             MenuViewModel menuViewModel, 
             PathControlsFromViewModel pathControlsViewModel,
             RenameInterfaceViewModel renameInterfaceViewModel,
-            SelectedItem selectedItem)
+            CurrentFile selectedItem)
         {
             this.MenuViewModel = menuViewModel;
             this.PathControlsFromViewModel = pathControlsViewModel;

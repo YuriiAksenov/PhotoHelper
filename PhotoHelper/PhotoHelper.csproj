@@ -85,13 +85,13 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Enums\Enums.cs" />
-    <Compile Include="Model\Folder.cs" />
+    <Compile Include="Model\FileInfoComponents.cs" />
     <Compile Include="Model\PathControlsModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\PathControlBase.cs" />
     <Compile Include="ViewModel\RenameInterfaceViewModel.cs" />
-    <Compile Include="ViewModel\SelectedItem.cs" />
+    <Compile Include="ViewModel\CurrentFile.cs" />
     <Compile Include="Views\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
