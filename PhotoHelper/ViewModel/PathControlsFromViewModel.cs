@@ -22,7 +22,7 @@ namespace PhotoHelper.ViewModel
         public ICommand OpenFolderDialogCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public bool IsExist { get; set; }
-        public SelectedItem SelectedItem { get;}
+        public SelectedItem SelectedItem { get; set; }
         public Folder SelecteFileControl { get; set; }
         
         public PathControlsFromViewModel(SelectedItem selectedItem)
@@ -31,7 +31,7 @@ namespace PhotoHelper.ViewModel
             UpdateCommand = new RelayCommand(this.Update);
             OpenFolderDialogCommand = new RelayCommand(this.OpenFolderDialog);
             SelectedItem = selectedItem;
-            SelecteFileControl = SelectedItem.ItemPath;
+            //SelecteFileControl = SelectedItem.ItemPath;
 
         }
 
@@ -51,7 +51,7 @@ namespace PhotoHelper.ViewModel
             var t = d as PathControlsFromViewModel;
             if (t != null &&  t.SelectedFile!=null)
             {
-                
+                t.SelectedItem.ItemPath = t.SelectedFile.fileName;
                 //SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
                 //MessageBox.Show(SelectedItem.ItemPath);
 
@@ -142,5 +142,19 @@ namespace PhotoHelper.ViewModel
                 Items = CollectionViewSource.GetDefaultView(Folder.GetFiles(FolderPath));
             }
         }
+
+
+
+        public string MyProperty
+        {
+            get { return (string)GetValue(MyPropertyProperty); }
+            set { SetValue(MyPropertyProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MyPropertyProperty =
+            DependencyProperty.Register("MyProperty", typeof(string), typeof(PathControlsFromViewModel), new PropertyMetadata(""));
+
+
     }
 }

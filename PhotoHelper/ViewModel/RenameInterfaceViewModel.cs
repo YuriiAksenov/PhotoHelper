@@ -10,7 +10,7 @@ namespace PhotoHelper.ViewModel
 {
     public  class RenameInterfaceViewModel:DependencyObject
     {
-        public SelectedItem SelectedItem { get;}
+        public SelectedItem SelectedItem { get; set; }
 
         public string MyProperty
         {
