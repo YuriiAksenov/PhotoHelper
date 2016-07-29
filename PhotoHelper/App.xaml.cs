@@ -19,11 +19,13 @@ namespace PhotoHelper
         [STAThread]
         static void Main(string[] args)
         {
-            MenuViewModel menuViewModel = new MenuViewModel();
-            PathControlsFromViewModel pathControlsFromViewModel = new PathControlsFromViewModel();
-            RenameInterfaceViewModel renameInterfaceViewModel = new RenameInterfaceViewModel(pathControlsFromViewModel);
+            SelectedItem selectedItem = new SelectedItem();
 
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(menuViewModel,pathControlsFromViewModel,renameInterfaceViewModel);
+            MenuViewModel menuViewModel = new MenuViewModel();
+            PathControlsFromViewModel pathControlsFromViewModel = new PathControlsFromViewModel(selectedItem);
+            RenameInterfaceViewModel renameInterfaceViewModel = new RenameInterfaceViewModel(selectedItem);
+
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(menuViewModel,pathControlsFromViewModel,renameInterfaceViewModel,selectedItem);
 
             MainWindow mainWindow = new MainWindow(mainWindowViewModel);
             mainWindow.ShowDialog();

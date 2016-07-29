@@ -16,8 +16,24 @@ using System.Windows.Input;
 
 namespace PhotoHelper.ViewModel
 {
-    public class PathControlsFromViewModel:DependencyObject
+    public class PathControlsFromViewModel:ViewModelBase
     {
+
+        public ICommand OpenFolderDialogCommand { get; set; }
+        public ICommand UpdateCommand { get; set; }
+        public bool IsExist { get; set; }
+        public SelectedItem SelectedItem { get;}
+        public Folder SelecteFileControl { get; set; }
+        
+        public PathControlsFromViewModel(SelectedItem selectedItem)
+        {
+            GetFiles();
+            UpdateCommand = new RelayCommand(this.Update);
+            OpenFolderDialogCommand = new RelayCommand(this.OpenFolderDialog);
+            SelectedItem = selectedItem;
+            SelecteFileControl = SelectedItem.ItemPath;
+
+        }
 
 
         public Folder SelectedFile
@@ -35,25 +51,15 @@ namespace PhotoHelper.ViewModel
             var t = d as PathControlsFromViewModel;
             if (t != null &&  t.SelectedFile!=null)
             {
-                SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
+                
+                //SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
+                //MessageBox.Show(SelectedItem.ItemPath);
+
                 MessageBox.Show(string.IsNullOrWhiteSpace(t.SelectedFile.oldPath) ? "Не выбран" : t.SelectedFile.oldPath + "  " + (string.IsNullOrWhiteSpace(t.SelectedFile.fileName)? "Не выбран" : t.SelectedFile.fileName));
             }
         }
 
-        public ICommand OpenFolderDialogCommand { get; set; }
-        public bool IsExist { get; set; }
-
-        public ICommand UpdateCommand { get; set; }
-        //<summary
-        public PathControlsFromViewModel()
-        {
-            GetFiles();
-            UpdateCommand = new RelayCommand(this.Update);
-            OpenFolderDialogCommand = new RelayCommand(this.OpenFolderDialog);
-
-        }
-
-
+       
         public string FolderPath
         {
             get { return (string)GetValue(FolderPathProperty); }

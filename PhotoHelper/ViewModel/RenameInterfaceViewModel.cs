@@ -10,10 +10,7 @@ namespace PhotoHelper.ViewModel
 {
     public  class RenameInterfaceViewModel:DependencyObject
     {
-        private PathControlsFromViewModel _pathControlsFromViewModel;
-
-
-
+        public SelectedItem SelectedItem { get;}
 
         public string MyProperty
         {
@@ -49,11 +46,14 @@ namespace PhotoHelper.ViewModel
             MessageBox.Show(t.CurrentFolder.fileName);
         }
 
-        public RenameInterfaceViewModel(PathControlsFromViewModel pathControlsFromViewModel)
+        public RenameInterfaceViewModel(SelectedItem SelectedItem)
         {
-            this._pathControlsFromViewModel = pathControlsFromViewModel;
-            MyProperty = SelectedItem.ItemPath.ToString();
+            this.SelectedItem = SelectedItem;
+            MyProperty = "How";
+            MyProperty = SelectedItem.ItemPath.oldPath;
+            
             
         }
+        
     }
 }

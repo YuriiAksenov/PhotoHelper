@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TextBox  Text="{Binding CurrentFolder, UpdateSourceTrigger=PropertyChanged}" MaxHeight="150" MaxWidth="150"></TextBox>
+        <TextBox DataContext="SelectedItem" Text="{Binding ItemPath, UpdateSourceTrigger=PropertyChanged}" MaxHeight="150" MaxWidth="150"></TextBox>
     </Grid>
 </UserControl>
