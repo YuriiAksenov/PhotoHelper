@@ -16,7 +16,7 @@ using System.Windows.Input;
 
 namespace PhotoHelper.ViewModel
 {
-    public class PathControlsFromViewModel:ViewModelBase
+    public class PathControlsFromViewModel:DependencyObject
     {
 
         public ICommand OpenFolderDialogCommand { get; set; }

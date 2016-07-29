@@ -50,7 +50,7 @@ namespace PhotoHelper.ViewModel
         {
             this.SelectedItem = SelectedItem;
             MyProperty = "How";
-            MyProperty = SelectedItem.ItemPath.oldPath;
+            
             
             
         }
