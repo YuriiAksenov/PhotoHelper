@@ -15,10 +15,44 @@ namespace PhotoHelper.ViewModel
         public RenameInterfaceViewModel(CurrentFile currentFile)
         {
             this.CurrentFile = currentFile;
+            
         }
 
 
-        public FileInfoComponents CurrentFolder
+
+
+        public string FileId
+        {
+            get { return (string)GetValue(FileIdProperty); }
+            set { SetValue(FileIdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FileId.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FileIdProperty =
+            DependencyProperty.Register("FileId", typeof(string), typeof(RenameInterfaceViewModel), new PropertyMetadata(""));
+
+
+
+        public string FileDescription
+        {
+            get { return (string)GetValue(FileDescriptionProperty); }
+            set { SetValue(FileDescriptionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Description.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FileDescriptionProperty =
+            DependencyProperty.Register("FileDescription", typeof(string), typeof(RenameInterfaceViewModel), new PropertyMetadata("",FileDescriptionChanged));
+
+        private static void FileDescriptionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var fileDescriptionChanged = d as RenameInterfaceViewModel;
+            if(fileDescriptionChanged != null)
+            {
+                fileDescriptionChanged.CurrentFile.FileInfoComponents.FileDescription = fileDescriptionChanged.FileDescription;
+            }
+        }
+
+        public FileInfoComponents FileInfoComponents
         {
             get { return (FileInfoComponents)GetValue(CurrentFolderProperty); }
             set { SetValue(CurrentFolderProperty, value); }
@@ -32,7 +66,7 @@ namespace PhotoHelper.ViewModel
         {
             var t = d as RenameInterfaceViewModel;
             if(t!=null)
-            MessageBox.Show(t.CurrentFolder.FileName);
+            MessageBox.Show(t.FileInfoComponents.FileName);
         }
 
         

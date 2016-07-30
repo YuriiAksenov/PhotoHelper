@@ -6,7 +6,7 @@
         xmlns:controls="clr-namespace:PhotoHelper.Views"
         xmlns:local="clr-namespace:PhotoHelper"
         mc:Ignorable="d"
-        Title="Фото помошник" Height="350" Width="525">
+        Title="Фото помошник" MinHeight="150" MinWidth="225">
     
     
     
@@ -31,7 +31,7 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1">
-            <controls:RenameInterface DataContext="{Binding Path=RenameInterfaceViewModel}"/>
+            <controls:RenameInterface DataContext="{Binding Path=RenameInterfaceViewModel}" />
         </Grid>
 
         

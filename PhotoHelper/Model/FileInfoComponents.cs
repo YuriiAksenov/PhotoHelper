@@ -19,13 +19,13 @@ namespace PhotoHelper.Model
         public bool Additional { get; set; }
 
 
-        public static FileInfoComponents[] GetFilesInfo(string folderPath)
+        public static FileInfoComponents[] GetFilesInfo(string folderPathFrom)
         {
             
-            if(Directory.Exists(folderPath))
+            if(Directory.Exists(folderPathFrom))
             {
                 
-                var filesNames = Directory.EnumerateFiles(folderPath,"*.*",SearchOption.TopDirectoryOnly);
+                var filesNames = Directory.EnumerateFiles(folderPathFrom,"*.*",SearchOption.TopDirectoryOnly);
                 if(filesNames!=null)
                 {
                     List<FileInfoComponents> arrrayforreturn = new List<FileInfoComponents>() ;
@@ -33,9 +33,17 @@ namespace PhotoHelper.Model
                     foreach(var item in filesNames)
                     {
                         FileInfoComponents currentFolder = new FileInfoComponents();
-                        currentFolder.PathFrom = folderPath;
-                        currentFolder.PathTo = "";
-                        currentFolder.FileName = item.Substring(item.LastIndexOf('\\')+1);
+                        try
+                        {
+                            currentFolder.PathFrom = folderPathFrom;
+                            currentFolder.PathTo = "";
+                            currentFolder.FileId = item.Substring(item.LastIndexOf('_')+1, item.LastIndexOf('.') - item.LastIndexOf('_')-1);
+                            currentFolder.FileName = item.Substring(item.LastIndexOf('\\') + 1);
+                        }
+                        catch(Exception e)
+                        {
+                            throw new Exception("Ошибка в преобразовании строк. " +e.Message);
+                        }
                         arrrayforreturn.Add(currentFolder);
                     }
                     return arrrayforreturn.ToArray();

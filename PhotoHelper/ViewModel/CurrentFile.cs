@@ -11,29 +11,52 @@ namespace PhotoHelper.ViewModel
     public class CurrentFile : DependencyObject
     {
 
-        public CurrentFile()
-        {
-            MessageBox.Show("Создание Selected Item");
-        }
-        public static FileInfoComponents CurrentFileBufferStatic { get;set;}
+       
+        public static FileInfoComponents FileInfoComponentsStatic { get; set; }
 
-        public FileInfoComponents CurrentFileBuffer
+        public FileInfoComponents FileInfoComponents
         {
             get { return (FileInfoComponents)GetValue(ItemPathProperty); }
             set { SetValue(ItemPathProperty, value); }
         }
- 
+
         // Using a DependencyProperty as the backing store for ItemPath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemPathProperty =
-            DependencyProperty.Register("ItemPath", typeof(FileInfoComponents), typeof(CurrentFile), new PropertyMetadata(null, CurrenttFileBufferChanged));
+            DependencyProperty.Register("ItemPath", typeof(FileInfoComponents), typeof(CurrentFile), new PropertyMetadata(null, FileInfoComponentsChanged));
 
-        private static void CurrenttFileBufferChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void FileInfoComponentsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            MessageBox.Show("Selected Item is changed");
+            
             var t = d as CurrentFile;
             if (t != null)
             {
-                CurrentFileBufferStatic = (d as CurrentFile).CurrentFileBuffer;
+                FileInfoComponentsStatic = t.FileInfoComponents;
+                t.FileId = t.FileInfoComponents.FileId;
+                MessageBox.Show("FileInfoComponents был изменен");
+            }
+        }
+
+
+
+
+
+        public string FileId
+        {
+            get { return (string)GetValue(FileIdProperty); }
+            set { SetValue(FileIdProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FileId.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FileIdProperty =
+            DependencyProperty.Register("FileId", typeof(string), typeof(CurrentFile), new PropertyMetadata("",FileIdChanged));
+
+        private static void FileIdChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var t = d as CurrentFile;
+            if(t !=null)
+            {
+                t.FileInfoComponents.FileId = t.FileId;
+                MessageBox.Show("FileId был изменен");
             }
         }
     }

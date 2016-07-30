@@ -47,7 +47,8 @@ namespace PhotoHelper.ViewModel
             var t = d as PathControlsFromViewModel;
             if (t != null &&  t.SelectedFile!=null)
             {
-                t.CurrentFile.CurrentFileBuffer= t.SelectedFile;
+                t.CurrentFile.FileInfoComponents= t.SelectedFile;
+                
                 //SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
                 //MessageBox.Show(SelectedItem.ItemPath);
 
