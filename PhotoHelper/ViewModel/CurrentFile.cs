@@ -57,6 +57,7 @@ namespace PhotoHelper.ViewModel
             {
                 t.FileInfoComponents.FileId = t.FileId;
                 MessageBox.Show("FileId был изменен");
+                //t.FileInfoComponents = new FileInfoComponents();
             }
         }
     }
