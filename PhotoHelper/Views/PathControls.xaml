@@ -28,7 +28,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            
+            <Image   Stretch="Uniform" Height="150" Width="150"/>
         </StackPanel>
     </Grid>
 </UserControl>

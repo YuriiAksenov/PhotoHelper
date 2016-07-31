@@ -40,9 +40,9 @@ namespace PhotoHelper.ViewModel
 
         // Using a DependencyProperty as the backing store for SelectedFile.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedFileProperty =
-            DependencyProperty.Register("SelectedFile", typeof(Model.FileInfoComponents), typeof(PathControlsFromViewModel), new PropertyMetadata(null, FileInfoComponents_Changed));
+            DependencyProperty.Register("SelectedFile", typeof(Model.FileInfoComponents), typeof(PathControlsFromViewModel), new PropertyMetadata(null, SelectedFile_Changed));
 
-        private static void FileInfoComponents_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void SelectedFile_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var t = d as PathControlsFromViewModel;
             if (t != null &&  t.SelectedFile!=null)

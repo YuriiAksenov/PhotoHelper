@@ -5,13 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PhotoHelper.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="300" d:DesignWidth="500">
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+
     <Grid>
         <!--DataContext="{Binding Path=SelectedItem}"   Text="{Binding SelectedItem.ItemPath.fileName, UpdateSourceTrigger=PropertyChanged}" -->
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="100*"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -33,8 +39,8 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Описание файла" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <TextBox Grid.Column="1" DataContext="{Binding Path=CurrentFile.}" 
-                     Text="{Binding FileInfoComponents.FileName, UpdateSourceTrigger=PropertyChanged}" 
+            <TextBox Grid.Column="1"  
+                     Text="{Binding FileDescription, UpdateSourceTrigger=PropertyChanged}" 
                      Margin="5" Height="50"  HorizontalAlignment="Stretch"></TextBox>
         </Grid>
         <Grid Grid.Row="2" >
@@ -53,8 +59,28 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Дополнительно" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            
+
             <RadioButton Grid.Column="1" DataContext="{Binding Path=CurrentFile.}" VerticalContentAlignment="Center" Margin="5"></RadioButton>
+        </Grid>
+        <Grid Grid.Row="4" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="100*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Новое название файла" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1"  Grid.Column="0" Text="{Binding FullNewName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Stretch"  Margin="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"></TextBox>
+
+            <Button Grid.Row="1"  Grid.Column="1" Content="Принять изменение" Padding="5,10,5,10" Command="{Binding AcceptChanging}"  VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Blue" Background="#FFFAFDFF"  />
+        </Grid>
+
+        <Grid Grid.Row="5" >
+            <TextBox IsReadOnly="True" BorderBrush="Red" BorderThickness="2"  FontSize="15" Text="{Binding MessageNotice, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center" Background="White" TextDecorations="" />
         </Grid>
 
     </Grid>
