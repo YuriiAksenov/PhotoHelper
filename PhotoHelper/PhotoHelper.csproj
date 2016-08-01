@@ -100,8 +100,11 @@
     <Compile Include="Views\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PathControls.xaml.cs">
-      <DependentUpon>PathControls.xaml</DependentUpon>
+    <Compile Include="Views\PathControlsFrom.xaml.cs">
+      <DependentUpon>PathControlsFrom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PathControlsTo.xaml.cs">
+      <DependentUpon>PathControlsTo.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RenameInterface.xaml.cs">
       <DependentUpon>RenameInterface.xaml</DependentUpon>
@@ -123,7 +126,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PathControls.xaml">
+    <Page Include="Views\PathControlsFrom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PathControlsTo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

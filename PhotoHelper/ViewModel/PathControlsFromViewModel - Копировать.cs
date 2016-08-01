@@ -48,7 +48,7 @@ namespace PhotoHelper.ViewModel
                 t.RenameInterfaceViewModel.FileInfoComponents = fileInfoComponents;
 
                 t.RenameInterfaceViewModel.MessageNoticeUpdate = "Выбран новый файл " + t.SelectedFile.FileOnlyId;
-                t.RenameInterfaceViewModel.NewName = t.RenameInterfaceViewModel.FileInfoComponents.CombineNewName();
+                
                 //SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
                 //MessageBox.Show(SelectedItem.ItemPath);
 
@@ -73,20 +73,14 @@ namespace PhotoHelper.ViewModel
             {
                 if (Directory.Exists(t.FolderPath))
                 {
-                    PathControls.PathFrom = t.FolderPath;
                     t.Items = null;
-                    t.Items = CollectionViewSource.GetDefaultView(ForCollectionItems.GetItems(PathControls.PathFrom,PathControls.Filter,SearchOption.TopDirectoryOnly));
+                    t.Items = CollectionViewSource.GetDefaultView(ForCollectionItems.GetItems(t.FolderPath,true));
+                    PathControls.PathFrom = t.FolderPath;
 
-                    t.RenameInterfaceViewModel.RenameInterfaceEnabled = true;
                     t.MessageNoticeFolderExist = "Выбранный путь сещуствует.";
                     t.RenameInterfaceViewModel.MessageNoticeUpdate = "Выбран новый путь папки источника.";
-                } else
-                {
-                    t.MessageNoticeFolderExist = "Выбранный путь НЕ сещуствует.";
-                    t.RenameInterfaceViewModel.RenameInterfaceEnabled = false;
-                    t.RenameInterfaceViewModel.MessageNoticeUpdate = "Чтобы разблокировать панель выбери папку источник";
                 }
-               
+               t.MessageNoticeFolderExist = "Выбранный путь НЕ сещуствует.";
             }
         }
 
@@ -127,11 +121,11 @@ namespace PhotoHelper.ViewModel
 
         // Using a DependencyProperty as the backing store for MessageNoticeFolderExist.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MessageNoticeFolderExistProperty =
-            DependencyProperty.Register("MessageNoticeFolderExist", typeof(string), typeof(PathControlsFromViewModel), new PropertyMetadata("",Changed));
+            DependencyProperty.Register("MessageNoticeFolderExist", typeof(string), typeof(RenameInterfaceViewModel), new PropertyMetadata("",Changed));
 
         private static void Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-           // MessageBox.Show("Изменился путь");
+            MessageBox.Show("Изменился путь");
         }
     }
 }

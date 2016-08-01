@@ -12,11 +12,11 @@ namespace PhotoHelper.Model
         public string FileName { get; set; }
         public string FileOnlyId { get; set; }
 
-        public static ForCollectionItems[] GetItems(string FolderPath,bool IsTopDirectoryOnly=true)
+        public static ForCollectionItems[] GetItems(string FolderPath,string Filter="*.*",SearchOption SearchOption=SearchOption.TopDirectoryOnly)
         {
             if(Directory.Exists(FolderPath))
             {
-                var files = Directory.GetFiles(FolderPath, "*.*", IsTopDirectoryOnly ? SearchOption.TopDirectoryOnly : SearchOption.AllDirectories);
+                var files = Directory.GetFiles(FolderPath, Filter,SearchOption);
                 if(files!=null)
                 {
                     List<ForCollectionItems> listCollectionItems = new List<ForCollectionItems>();

@@ -5,9 +5,9 @@ namespace PhotoHelper.Views
     /// <summary>
     /// Логика взаимодействия для PathControls.xaml
     /// </summary>
-    public partial class PathControls : UserControl
+    public partial class PathControlsFrom : UserControl
     {
-        public PathControls()
+        public PathControlsFrom()
         {
             InitializeComponent();
         }

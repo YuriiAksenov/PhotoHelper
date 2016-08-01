@@ -7,13 +7,59 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using PhotoHelper.HelperMethods;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 
 namespace PhotoHelper.ViewModel
 {
     public  class RenameInterfaceViewModel:DependencyObject
     {
         //TODO
-        //Описать свой класс где в командах будут приниматься параметры от команд https://habrahabr.ru/post/196960/  https://msdn.microsoft.com/en-us/magazine/dn237302.aspx
+        //Описать свой класс где в командах будут приниматься параметры от команд https://habrahabr.ru/post/196960/  https://msdn.microsoft.com/en-us/magazine/dn237302.aspx;
+
+        public ICommand AcceptChangingCommand { get; set; }
+        public RenameInterfaceViewModel()
+        {
+            AcceptChangingCommand = new RelayCommand(this.AcceptChanging);
+        }
+
+        private void AcceptChanging()
+        {
+            try
+            {
+                Directory.Move(Path.Combine(PathControls.PathFrom,FileInfoComponents.FileOldName),Path.Combine(PathControls.PathTo,FileInfoComponents.CombineNewName()));
+                MessageNoticeUpdate = "Файл перемещён.";
+                MessageBox.Show("Файл перемещён.");
+
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show("Файл НЕ БЫЛ перемещён. Возникли проблемы. "+e.Message);
+                MessageNoticeUpdate = "Файл НЕ БЫЛ перемещён. Возникли проблемы.";
+            }
+            
+        }
+
+        private bool CanAcceptChanging()
+        {
+            if(string.IsNullOrWhiteSpace(PathControls.PathFrom) || string.IsNullOrWhiteSpace(PathControls.PathTo))
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+
+        public bool RenameInterfaceEnabled
+        {
+            get { return (bool)GetValue(RenameInterfaceEnabledProperty); }
+            set { SetValue(RenameInterfaceEnabledProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RenameInterfaceEnabled.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RenameInterfaceEnabledProperty =
+            DependencyProperty.Register("RenameInterfaceEnabled", typeof(bool), typeof(RenameInterfaceViewModel), new PropertyMetadata(false));
 
         public FileInfoComponents FileInfoComponents
         {
@@ -55,9 +101,10 @@ namespace PhotoHelper.ViewModel
                 {
                     //TODO
                     //Изменить длину на варьируемую величину
-                    if(filename.Contains(t.FileId) && t.FileId.Length==filename.MaxDigitCount())
+                    if(filename.Contains(t.FileId) && t.FileId.Length==filename.MaxDigitCount() && !string.IsNullOrWhiteSpace(t.FileId))
                     {
                         foundname = true;
+                        
                         t.FileInfoComponents.Parsing(filename);
 
                         t.NewName = null;

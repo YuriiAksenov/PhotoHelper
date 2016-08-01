@@ -19,7 +19,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
@@ -27,14 +27,18 @@
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="0">
-            <controls:PathControls DataContext="{Binding Path=PathControlsFromViewModel}"/>
+            <controls:PathControlsFrom DataContext="{Binding Path=PathControlsFromViewModel}"/>
         </Grid>
 
         <Grid Grid.Row="1" Grid.Column="1">
             <controls:RenameInterface DataContext="{Binding Path=RenameInterfaceViewModel}" />
         </Grid>
 
-        
-        
+        <Grid Grid.Row="1" Grid.Column="2">
+            <controls:PathControlsTo DataContext="{Binding Path=PathControlsToViewModel}" />
+        </Grid>
+
+
+
     </Grid>
 </Window>
