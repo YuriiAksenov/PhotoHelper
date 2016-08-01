@@ -36,7 +36,7 @@ namespace PhotoHelper.ViewModel
 
         private static void FolderPath_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var current = d as PathControlsFromViewModel;
+           /* var current = d as _PathControlBase;
             if (current != null)
             {
                 current.IsExist = false;
@@ -44,7 +44,7 @@ namespace PhotoHelper.ViewModel
                 {
                     current.IsExist = true;
                 }
-            }
+            }*/
         }
         
         public void FolderPath_IsExist(string path)

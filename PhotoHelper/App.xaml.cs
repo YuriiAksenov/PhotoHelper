@@ -22,10 +22,11 @@ namespace PhotoHelper
             CurrentFile currentFile = new CurrentFile();
 
             MenuViewModel menuViewModel = new MenuViewModel();
-            PathControlsFromViewModel pathControlsFromViewModel = new PathControlsFromViewModel(currentFile);
-            RenameInterfaceViewModel renameInterfaceViewModel = new RenameInterfaceViewModel(currentFile);
+            RenameInterfaceViewModel renameInterfaceViewModel = new RenameInterfaceViewModel();
+            PathControlsFromViewModel pathControlsFromViewModel = new PathControlsFromViewModel(renameInterfaceViewModel);
+            
 
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(menuViewModel,pathControlsFromViewModel,renameInterfaceViewModel, currentFile);
+            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel(menuViewModel,pathControlsFromViewModel,renameInterfaceViewModel);
 
             MainWindow mainWindow = new MainWindow(mainWindowViewModel);
             mainWindow.ShowDialog();

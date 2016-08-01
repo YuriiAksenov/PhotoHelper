@@ -89,9 +89,10 @@
     <Compile Include="Model\PathControlsModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
-    <Compile Include="ViewModel\PathControlBase.cs" />
+    <Compile Include="ViewModel\_RenameInterfaceViewModel - Копировать.cs" />
+    <Compile Include="ViewModel\_PathControlBase.cs" />
     <Compile Include="ViewModel\RenameInterfaceViewModel.cs" />
-    <Compile Include="ViewModel\CurrentFile.cs" />
+    <Compile Include="ViewModel\_CurrentFile.cs" />
     <Compile Include="Views\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>

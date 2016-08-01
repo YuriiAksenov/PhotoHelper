@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace PhotoHelper.ViewModel
 {
-    public  class RenameInterfaceViewModel:DependencyObject
+    public  class _RenameInterfaceViewModel:DependencyObject
     {
         //TODO
         //Описать свой класс где в командах будут приниматься параметры от команд https://habrahabr.ru/post/196960/  https://msdn.microsoft.com/en-us/magazine/dn237302.aspx

@@ -18,7 +18,7 @@ namespace PhotoHelper.ViewModel
         //TODO
         //Описать свой класс где в командах будут приниматься параметры от команд https://habrahabr.ru/post/196960/  https://msdn.microsoft.com/en-us/magazine/dn237302.aspx
 
-        public static FileInfoComponents FileInfoComponentsStatic{ get; set; }
+        /*public static FileInfoComponents FileInfoComponentsStatic{ get; set; }
 
         public RelayCommand OpenFolderDialogCommandFrom{ get; set; }
         public RelayCommand OpenFolderDialogCommandTo { get; set; }
@@ -96,7 +96,7 @@ namespace PhotoHelper.ViewModel
                 {
                     fileIdChanged.MessageNotice = "Данный файл НЕ существует. Проверьте или введите другое число, пожалуйста!";
                 }
-            }
+            };
 
 
 
@@ -139,6 +139,6 @@ namespace PhotoHelper.ViewModel
         }
 
         #endregion
-
+        */
     }
 }

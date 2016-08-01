@@ -18,17 +18,15 @@ namespace PhotoHelper.ViewModel
 {
     public class PathControlsFromViewModel:DependencyObject
     {
+        public RenameInterfaceViewModel RenameInterfaceViewModel { get; set; }
 
         public ICommand OpenFolderDialogCommand { get; set; }
-       
-        public bool IsExist { get; set; }
-        public CurrentFile CurrentFile { get; set; }
-        
-        public PathControlsFromViewModel(CurrentFile currentFile)
+               
+        public PathControlsFromViewModel(RenameInterfaceViewModel renameInterfaceViewModel)
         {
-            GetFiles();
+            RenameInterfaceViewModel = renameInterfaceViewModel;
             OpenFolderDialogCommand = new RelayCommand(this.OpenFolderDialog);
-            CurrentFile = currentFile;
+            GetFiles();
         }
 
 
@@ -38,16 +36,16 @@ namespace PhotoHelper.ViewModel
             set { SetValue(SelectedFileProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for SelectedFile.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SelectedFileProperty =
-            DependencyProperty.Register("SelectedFile", typeof(Model.FileInfoComponents), typeof(PathControlsFromViewModel), new PropertyMetadata(null, SelectedFile_Changed));
+            DependencyProperty.Register("SelectedFile", typeof(Model.FileInfoComponents), typeof(PathControlsFromViewModel), new PropertyMetadata(null, FileInfoComponents_Changed));
 
-        private static void SelectedFile_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void FileInfoComponents_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var t = d as PathControlsFromViewModel;
             if (t != null &&  t.SelectedFile!=null)
             {
-                t.CurrentFile.FileInfoComponents= t.SelectedFile;
+                //t.RenameInterfaceViewModel.FileInfoComponents = null;
+                t.RenameInterfaceViewModel.FileInfoComponents= t.SelectedFile;
                 
                 //SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
                 //MessageBox.Show(SelectedItem.ItemPath);
@@ -63,7 +61,6 @@ namespace PhotoHelper.ViewModel
             set { SetValue(FolderPathProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for FoldetPath.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FolderPathProperty =
             DependencyProperty.Register("FolderPath", typeof(string), typeof(PathControlsFromViewModel), new PropertyMetadata("", FolderPath_Changed));
 
@@ -72,10 +69,8 @@ namespace PhotoHelper.ViewModel
             var current = d as PathControlsFromViewModel;
             if (current != null)
             {
-                current.IsExist = false;
                 if (Directory.Exists(current.FolderPath))
                 {
-                    current.IsExist = true;
                     current.Items = null;
                     current.Items = CollectionViewSource.GetDefaultView(Model.FileInfoComponents.GetFilesInfo(current.FolderPath));
                 }
@@ -88,15 +83,6 @@ namespace PhotoHelper.ViewModel
             {
                 Items = CollectionViewSource.GetDefaultView(Model.FileInfoComponents.GetFilesInfo(FolderPath));
             }
-        }
-
-        public void FolderPath_IsExist(string path)
-        {
-            if (Directory.Exists(path))
-            {
-                IsExist = true;
-            }
-            IsExist = false;
         }
 
         public void OpenFolderDialog()
@@ -117,11 +103,6 @@ namespace PhotoHelper.ViewModel
             }
         }
 
-        public string CutFolderPath(string fullFolderPath = null)
-        {
-            return !string.IsNullOrWhiteSpace(fullFolderPath) ? fullFolderPath.Substring(fullFolderPath.LastIndexOf('/'))
-                    : (!string.IsNullOrWhiteSpace(FolderPath) ? FolderPath.Substring(FolderPath.LastIndexOf('/')) : null);
-        }
 
         public ICollectionView Items
         {
@@ -129,7 +110,6 @@ namespace PhotoHelper.ViewModel
             set { SetValue(ItemsProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Items.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty ItemsProperty =
             DependencyProperty.Register("Items", typeof(ICollectionView), typeof(PathControlsFromViewModel), new PropertyMetadata(null));
 

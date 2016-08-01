@@ -17,13 +17,11 @@ namespace PhotoHelper.ViewModel
         public MainWindowViewModel(
             MenuViewModel menuViewModel, 
             PathControlsFromViewModel pathControlsViewModel,
-            RenameInterfaceViewModel renameInterfaceViewModel,
-            CurrentFile currentFile)
+            RenameInterfaceViewModel renameInterfaceViewModel)
         {
             this.MenuViewModel = menuViewModel;
             this.PathControlsFromViewModel = pathControlsViewModel;
             this.RenameInterfaceViewModel = renameInterfaceViewModel;
-            this.CurrentFile = currentFile;
 
             MessageBox.Show("Привет");
         }
