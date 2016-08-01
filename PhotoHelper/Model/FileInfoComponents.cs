@@ -18,6 +18,15 @@ namespace PhotoHelper.Model
         public int ComponentCount { get; set; }
         public bool Additional { get; set; }
 
+        public FileInfoComponents() : this("None") {}
+        public FileInfoComponents(string OldFileName)
+        {
+            if (OldFileName != "None" && !string.IsNullOrWhiteSpace(OldFileName))
+            {
+                Parsing(OldFileName);
+            }
+        }
+
         public void Parsing(string OldFileName)
         {
             FileNewName = "";
@@ -27,7 +36,7 @@ namespace PhotoHelper.Model
 
         }
         
-        public string CombineFileNewName()
+        public string CombineNewName()
         {
             string temp="";
             temp = (Additional? "Доп_" : "") + FileDescription + "_" + FileId + FileExtension;

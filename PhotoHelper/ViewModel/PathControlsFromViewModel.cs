@@ -44,11 +44,10 @@ namespace PhotoHelper.ViewModel
             if (t != null &&  t.SelectedFile!=null)
             {
                 //t.RenameInterfaceViewModel.FileInfoComponents = null;
-                FileInfoComponents fileInfoComponents = new FileInfoComponents();
-                fileInfoComponents.Parsing(t.SelectedFile.FileName);
+                FileInfoComponents fileInfoComponents = new FileInfoComponents(t.SelectedFile.FileName);
                 t.RenameInterfaceViewModel.FileInfoComponents = fileInfoComponents;
 
-                t.RenameInterfaceViewModel.MessageNotice = "Выбран новый файл " + t.SelectedFile.FileOnlyId;
+                t.RenameInterfaceViewModel.MessageNoticeUpdate = "Выбран новый файл " + t.SelectedFile.FileOnlyId;
                 
                 //SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
                 //MessageBox.Show(SelectedItem.ItemPath);
@@ -69,14 +68,19 @@ namespace PhotoHelper.ViewModel
 
         private static void FolderPath_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var current = d as PathControlsFromViewModel;
-            if (current != null)
+            var t = d as PathControlsFromViewModel;
+            if (t != null)
             {
-                if (Directory.Exists(current.FolderPath))
+                if (Directory.Exists(t.FolderPath))
                 {
-                    current.Items = null;
-                    current.Items = CollectionViewSource.GetDefaultView(ForCollectionItems.GetItems(current.FolderPath,true));
+                    t.Items = null;
+                    t.Items = CollectionViewSource.GetDefaultView(ForCollectionItems.GetItems(t.FolderPath,true));
+                    PathControls.PathFrom = t.FolderPath;
+
+                    t.MessageNoticeFolderExist = "Выбранный путь сещуствует.";
+                    t.RenameInterfaceViewModel.MessageNoticeUpdate = "Выбран новый путь папки источника.";
                 }
+               t.MessageNoticeFolderExist = "Выбранный путь НЕ сещуствует.";
             }
         }
 
@@ -107,11 +111,21 @@ namespace PhotoHelper.ViewModel
 
         public static readonly DependencyProperty ItemsProperty =
             DependencyProperty.Register("Items", typeof(ICollectionView), typeof(PathControlsFromViewModel), new PropertyMetadata(null));
-
         
 
+        public string MessageNoticeFolderExist
+        {
+            get { return (string)GetValue(MessageNoticeFolderExistProperty); }
+            set { SetValue(MessageNoticeFolderExistProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for MessageNoticeFolderExist.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MessageNoticeFolderExistProperty =
+            DependencyProperty.Register("MessageNoticeFolderExist", typeof(string), typeof(RenameInterfaceViewModel), new PropertyMetadata("",Changed));
 
-
+        private static void Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MessageBox.Show("Изменился путь");
+        }
     }
 }

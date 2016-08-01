@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using PhotoHelper.HelperMethods;
 
 namespace PhotoHelper.ViewModel
 {
@@ -28,7 +29,7 @@ namespace PhotoHelper.ViewModel
             var t = d as RenameInterfaceViewModel;
             if (t != null)
             {
-                //t.FileId = t.FileInfoComponents.FileId;
+                t.FileId = t.FileInfoComponents.FileId;
                 MessageBox.Show("FileInfoComponents был изменен");
             }
         }
@@ -44,33 +45,36 @@ namespace PhotoHelper.ViewModel
 
         private static void FileIdChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var fileIdChanged = d as RenameInterfaceViewModel;
-            if(fileIdChanged !=null)
+            var t = d as RenameInterfaceViewModel;
+            if(t !=null)
             {
-                //var filenames = Directory.GetFiles(fileIdChanged.FileInfoComponents.PathFrom, "*.*", SearchOption.TopDirectoryOnly);
+                var filenames = Directory.GetFiles(PathControls.PathFrom,PathControls.Filter,PathControls.SearchOption);
+
                 bool foundname = false;
-                //foreach(var filename in filenames)
-                /*{
-                    if(filename.Contains(fileIdChanged.FileId) && fileIdChanged.FileId.Length==4)
+                foreach(var filename in filenames)
+                {
+                    //TODO
+                    //Изменить длину на варьируемую величину
+                    if(filename.Contains(t.FileId) && t.FileId.Length==filename.MaxDigitCount())
                     {
                         foundname = true;
-                        fileIdChanged.FileInfoComponents.Parsing(filename);
-                        fileIdChanged.FullNewName = fileIdChanged.FileInfoComponents.MatchFullNewNameWithoutPathTo();
-                        fileIdChanged.FileInfoComponents.MatchFullNewNameWithoutPathTo();
-                        fileIdChanged.FullNewName = null;
-                        fileIdChanged.FullNewName = fileIdChanged.FileInfoComponents.FullNewNameWithoutPathTo;
+                        t.FileInfoComponents.Parsing(filename);
+
+                        t.NewName = null;
+                        t.NewName = t.FileInfoComponents.CombineNewName();
 
                         break;
                     }
-                }*/
+                }
                 if(foundname)
                 {
-                    fileIdChanged.MessageNotice = "Данный файл существует.";
+                    t.MessageNoticeFileExist = "Данный файл существует.";
+                    t.MessageNoticeUpdate = "Обновлен номер файла.";
 
                 }
                 else
                 {
-                    fileIdChanged.MessageNotice = "Данный файл НЕ существует. Проверьте или введите другое число, пожалуйста!";
+                    t.MessageNoticeFileExist = "Данный файл НЕ существует. Проверьте или введите другое число, пожалуйста!";
                 }
             }
         }
@@ -86,25 +90,57 @@ namespace PhotoHelper.ViewModel
 
         private static void FileDescriptionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var fileDescriptionChanged = d as RenameInterfaceViewModel;
-            if(fileDescriptionChanged != null)
+            var t = d as RenameInterfaceViewModel;
+            if(t != null)
             {
-                fileDescriptionChanged.FileInfoComponents.FileDescription = fileDescriptionChanged.FileDescription;
+                t.FileInfoComponents.FileDescription = t.FileDescription;
 
-                fileDescriptionChanged.FullNewName = null;
+                t.NewName = null;
+                t.NewName = t.FileInfoComponents.CombineNewName();
                 //fileDescriptionChanged.FileInfoComponents.MatchFullNewNameWithoutPathTo();
                 //fileDescriptionChanged.FullNewName = fileDescriptionChanged.FileInfoComponents.FullNewNameWithoutPathTo;
-                fileDescriptionChanged.MessageNotice = null;
-                fileDescriptionChanged.MessageNotice = "Обновлено описание.";
-                MessageBox.Show("Обновлено описание.");
+                t.MessageNoticeUpdate = null;
+                t.MessageNoticeUpdate = "Обновлено описание.";
+                //MessageBox.Show("Обновлено описание.");
             }
         }
 
-        
 
 
 
-        public string FullNewName
+        public bool AdditionalChecked
+        {
+            get { return (bool)GetValue(AdditionalCheckedProperty); }
+            set { SetValue(AdditionalCheckedProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for AdditionalChecked.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty AdditionalCheckedProperty =
+            DependencyProperty.Register("AdditionalChecked", typeof(bool), typeof(RenameInterfaceViewModel), new PropertyMetadata(false, AdditionalCheckedChanged));
+
+        private static void AdditionalCheckedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var t = d as RenameInterfaceViewModel;
+            if (t != null)
+            {
+                var k = (e.NewValue as bool?);
+                if (k==true)
+                {
+                    t.FileInfoComponents.Additional = true;
+                    t.NewName = t.FileInfoComponents.CombineNewName();
+                    t.MessageNoticeUpdate = "Добавлен критерий дополнительно.";
+                }
+                else
+                {
+                    t.FileInfoComponents.Additional = false;
+                    t.NewName = t.FileInfoComponents.CombineNewName();
+                    t.MessageNoticeUpdate = "Убран критерий дополнительно.";
+                }
+            }
+
+        }
+
+        public string NewName
         {
             get { return (string)GetValue(FullNewNameProperty); }
             set { SetValue(FullNewNameProperty, value); }
@@ -119,20 +155,32 @@ namespace PhotoHelper.ViewModel
             var t = d as RenameInterfaceViewModel;
             if(t!=null)
             {
-                t.MessageNotice= "Обновлено полное имя.";
-                MessageBox.Show("Обновлено полное имя.");
+                t.MessageNoticeUpdate= "Обновлено полное имя.";
+                //MessageBox.Show("Обновлено полное имя.");
             }
             
         }
 
-        public string MessageNotice
+        public string MessageNoticeUpdate
         {
-            get { return (string)GetValue(MessageNoticeProperty); }
-            set { SetValue(MessageNoticeProperty, value); }
+            get { return (string)GetValue(MessageNoticeUpdateProperty); }
+            set { SetValue(MessageNoticeUpdateProperty, value); }
         }
 
-        public static readonly DependencyProperty MessageNoticeProperty =
-            DependencyProperty.Register("MessageNotice", typeof(string), typeof(RenameInterfaceViewModel), new PropertyMetadata(""));
+        public static readonly DependencyProperty MessageNoticeUpdateProperty =
+            DependencyProperty.Register("MessageNoticeUpdate", typeof(string), typeof(RenameInterfaceViewModel), new PropertyMetadata(""));
+
+
+
+        public string MessageNoticeFileExist
+        {
+            get { return (string)GetValue(MessageNoticeFileExistProperty); }
+            set { SetValue(MessageNoticeFileExistProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MessageNotice.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MessageNoticeFileExistProperty =
+            DependencyProperty.Register("MessageNoticeFileExist", typeof(string), typeof(RenameInterfaceViewModel), new PropertyMetadata(""));
 
 
 

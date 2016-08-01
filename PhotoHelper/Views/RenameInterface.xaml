@@ -23,13 +23,15 @@
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="110"/>
-                <ColumnDefinition Width="100*"/>
+                <ColumnDefinition Width="100*" MaxWidth="150"/>
+                <ColumnDefinition Width="100*" MaxWidth="550"/>
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Номер файла" Margin="5" VerticalAlignment="Center"/>
             <TextBox Grid.Column="1" 
-                     Text="{Binding FileInfoComponents.FileName, UpdateSourceTrigger=PropertyChanged}" 
+                     Text="{Binding FileId, UpdateSourceTrigger=PropertyChanged}" 
                      Margin="5"  HorizontalAlignment="Stretch"  ></TextBox>
+            <TextBox Grid.Column="2" IsReadOnly="True" Text="{Binding MessageNoticeFileExist, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" BorderBrush="Red" BorderThickness="2" TextWrapping="Wrap" Margin="3" Padding="2" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="12"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -50,7 +52,7 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="Дополнительно" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            <CheckBox Grid.Column="1" DataContext="{Binding Path=CurrentFile.}" VerticalContentAlignment="Center" Margin="5"></CheckBox>
+            <CheckBox Grid.Column="1" IsChecked="{Binding AdditionalChecked}" VerticalContentAlignment="Center" Margin="5"></CheckBox>
         </Grid>
         <Grid Grid.Row="3" >
             <Grid.ColumnDefinitions>
@@ -80,7 +82,7 @@
         </Grid>
 
         <Grid Grid.Row="5" >
-            <TextBox IsReadOnly="True" BorderBrush="Red" BorderThickness="2"  FontSize="15" Text="{Binding MessageNotice, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center" Background="White" TextDecorations="" />
+            <TextBox IsReadOnly="True" BorderBrush="Red" BorderThickness="2"  FontSize="15" Text="{Binding MessageNoticeUpdate, UpdateSourceTrigger=PropertyChanged}" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center" Background="White" TextDecorations="" />
         </Grid>
 
     </Grid>

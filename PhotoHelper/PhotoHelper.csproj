@@ -85,12 +85,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="HelperMethods\StringExtension.cs" />
     <Compile Include="Model\_FileInfoComponents - Копировать.cs" />
     <Compile Include="Model\FileInfoComponents.cs" />
     <Compile Include="Model\ForCollectionItems.cs" />
-    <Compile Include="Model\PathControlsModel.cs" />
+    <Compile Include="Model\PathControls.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
+    <Compile Include="ViewModel\PathControlsToViewModel.cs" />
     <Compile Include="ViewModel\_RenameInterfaceViewModel - Копировать.cs" />
     <Compile Include="ViewModel\_PathControlBase.cs" />
     <Compile Include="ViewModel\RenameInterfaceViewModel.cs" />
