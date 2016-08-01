@@ -14,6 +14,25 @@ namespace PhotoHelper.ViewModel
         //TODO
         //Описать свой класс где в командах будут приниматься параметры от команд https://habrahabr.ru/post/196960/  https://msdn.microsoft.com/en-us/magazine/dn237302.aspx
 
+        public FileInfoComponents FileInfoComponents
+        {
+            get { return (FileInfoComponents)GetValue(CurrentFolderProperty); }
+            set { SetValue(CurrentFolderProperty, value); }
+        }
+
+        public static readonly DependencyProperty CurrentFolderProperty =
+            DependencyProperty.Register("FileInfoComponents", typeof(FileInfoComponents), typeof(RenameInterfaceViewModel), new PropertyMetadata(null, CurrentFolder_Changed));
+
+        private static void CurrentFolder_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var t = d as RenameInterfaceViewModel;
+            if (t != null)
+            {
+                //t.FileId = t.FileInfoComponents.FileId;
+                MessageBox.Show("FileInfoComponents был изменен");
+            }
+        }
+
         public string FileId
         {
             get { return (string)GetValue(FileIdProperty); }
@@ -28,10 +47,10 @@ namespace PhotoHelper.ViewModel
             var fileIdChanged = d as RenameInterfaceViewModel;
             if(fileIdChanged !=null)
             {
-                var filenames = Directory.GetFiles(fileIdChanged.FileInfoComponents.PathFrom, "*.*", SearchOption.TopDirectoryOnly);
+                //var filenames = Directory.GetFiles(fileIdChanged.FileInfoComponents.PathFrom, "*.*", SearchOption.TopDirectoryOnly);
                 bool foundname = false;
-                foreach(var filename in filenames)
-                {
+                //foreach(var filename in filenames)
+                /*{
                     if(filename.Contains(fileIdChanged.FileId) && fileIdChanged.FileId.Length==4)
                     {
                         foundname = true;
@@ -43,7 +62,7 @@ namespace PhotoHelper.ViewModel
 
                         break;
                     }
-                }
+                }*/
                 if(foundname)
                 {
                     fileIdChanged.MessageNotice = "Данный файл существует.";
@@ -73,32 +92,15 @@ namespace PhotoHelper.ViewModel
                 fileDescriptionChanged.FileInfoComponents.FileDescription = fileDescriptionChanged.FileDescription;
 
                 fileDescriptionChanged.FullNewName = null;
-                fileDescriptionChanged.FileInfoComponents.MatchFullNewNameWithoutPathTo();
-                fileDescriptionChanged.FullNewName = fileDescriptionChanged.FileInfoComponents.FullNewNameWithoutPathTo;
+                //fileDescriptionChanged.FileInfoComponents.MatchFullNewNameWithoutPathTo();
+                //fileDescriptionChanged.FullNewName = fileDescriptionChanged.FileInfoComponents.FullNewNameWithoutPathTo;
                 fileDescriptionChanged.MessageNotice = null;
                 fileDescriptionChanged.MessageNotice = "Обновлено описание.";
                 MessageBox.Show("Обновлено описание.");
             }
         }
 
-        public FileInfoComponents FileInfoComponents
-        {
-            get { return (FileInfoComponents)GetValue(CurrentFolderProperty); }
-            set { SetValue(CurrentFolderProperty, value); }
-        }
-
-        public static readonly DependencyProperty CurrentFolderProperty =
-            DependencyProperty.Register("FileInfoComponents", typeof(FileInfoComponents), typeof(RenameInterfaceViewModel), new PropertyMetadata(null,CurrentFolder_Changed));
-
-        private static void CurrentFolder_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var t = d as RenameInterfaceViewModel;
-            if (t != null)
-            { 
-                t.FileId = t.FileInfoComponents.FileId;
-                MessageBox.Show("FileInfoComponents был изменен");
-            }
-        }
+        
 
 
 

@@ -24,7 +24,7 @@
             <ListView ItemsSource="{Binding Items}"  SelectedItem="{Binding SelectedFile}" Margin="5" MinWidth="150" MaxWidth="250" VerticalAlignment="Stretch" MinHeight="100"  MaxHeight="250" ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding FileId}" Margin="5" MaxWidth="250" TextWrapping="Wrap" />
+                        <TextBlock Text="{Binding FileName}" Margin="5" MaxWidth="250" TextWrapping="Wrap" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

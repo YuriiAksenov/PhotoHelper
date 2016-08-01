@@ -26,31 +26,34 @@ namespace PhotoHelper.ViewModel
         {
             RenameInterfaceViewModel = renameInterfaceViewModel;
             OpenFolderDialogCommand = new RelayCommand(this.OpenFolderDialog);
-            GetFiles();
         }
 
 
-        public FileInfoComponents SelectedFile
+        public ForCollectionItems SelectedFile
         {
-            get { return (Model.FileInfoComponents)GetValue(SelectedFileProperty); }
+            get { return (Model.ForCollectionItems)GetValue(SelectedFileProperty); }
             set { SetValue(SelectedFileProperty, value); }
         }
 
         public static readonly DependencyProperty SelectedFileProperty =
-            DependencyProperty.Register("SelectedFile", typeof(Model.FileInfoComponents), typeof(PathControlsFromViewModel), new PropertyMetadata(null, FileInfoComponents_Changed));
+            DependencyProperty.Register("SelectedFile", typeof(Model.ForCollectionItems), typeof(PathControlsFromViewModel), new PropertyMetadata(null, SelectedFile_Changed));
 
-        private static void FileInfoComponents_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void SelectedFile_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var t = d as PathControlsFromViewModel;
             if (t != null &&  t.SelectedFile!=null)
             {
                 //t.RenameInterfaceViewModel.FileInfoComponents = null;
-                t.RenameInterfaceViewModel.FileInfoComponents= t.SelectedFile;
+                FileInfoComponents fileInfoComponents = new FileInfoComponents();
+                fileInfoComponents.Parsing(t.SelectedFile.FileName);
+                t.RenameInterfaceViewModel.FileInfoComponents = fileInfoComponents;
+
+                t.RenameInterfaceViewModel.MessageNotice = "Выбран новый файл " + t.SelectedFile.FileOnlyId;
                 
                 //SelectedItem.ItemPath = Path.Combine(t.SelectedFile.oldPath,t.SelectedFile.fileName);
                 //MessageBox.Show(SelectedItem.ItemPath);
 
-                MessageBox.Show(string.IsNullOrWhiteSpace(t.SelectedFile.PathFrom) ? "Не выбран" : t.SelectedFile.PathFrom + "  " + (string.IsNullOrWhiteSpace(t.SelectedFile.FileName)? "Не выбран" : t.SelectedFile.FileName));
+                //MessageBox.Show(string.IsNullOrWhiteSpace(t.SelectedFile.PathFrom) ? "Не выбран" : t.SelectedFile.PathFrom + "  " + (string.IsNullOrWhiteSpace(t.SelectedFile.FileName)? "Не выбран" : t.SelectedFile.FileName));
             }
         }
 
@@ -72,16 +75,8 @@ namespace PhotoHelper.ViewModel
                 if (Directory.Exists(current.FolderPath))
                 {
                     current.Items = null;
-                    current.Items = CollectionViewSource.GetDefaultView(Model.FileInfoComponents.GetFilesInfo(current.FolderPath));
+                    current.Items = CollectionViewSource.GetDefaultView(ForCollectionItems.GetItems(current.FolderPath,true));
                 }
-            }
-        }
-
-        public void GetFiles()
-        {
-            if (Directory.Exists(FolderPath))
-            {
-                Items = CollectionViewSource.GetDefaultView(Model.FileInfoComponents.GetFilesInfo(FolderPath));
             }
         }
 

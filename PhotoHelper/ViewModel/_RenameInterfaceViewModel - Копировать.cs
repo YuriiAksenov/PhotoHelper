@@ -14,7 +14,7 @@ namespace PhotoHelper.ViewModel
         //TODO
         //Описать свой класс где в командах будут приниматься параметры от команд https://habrahabr.ru/post/196960/  https://msdn.microsoft.com/en-us/magazine/dn237302.aspx
 
-        public string FileId
+       /* public string FileId
         {
             get { return (string)GetValue(FileIdProperty); }
             set { SetValue(FileIdProperty, value); }
@@ -133,6 +133,6 @@ namespace PhotoHelper.ViewModel
             DependencyProperty.Register("MessageNotice", typeof(string), typeof(RenameInterfaceViewModel), new PropertyMetadata(""));
 
 
-
+    */
     }
 }

@@ -85,7 +85,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Model\_FileInfoComponents - Копировать.cs" />
     <Compile Include="Model\FileInfoComponents.cs" />
+    <Compile Include="Model\ForCollectionItems.cs" />
     <Compile Include="Model\PathControlsModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
