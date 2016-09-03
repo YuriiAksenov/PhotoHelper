@@ -78,7 +78,7 @@
             <TextBlock Grid.Row="0" Grid.Column="0" Text="Новое название файла" Margin="5" TextWrapping="Wrap" VerticalAlignment="Center"/>
             <TextBox Grid.Row="1"  Grid.Column="0" Text="{Binding FullNewName, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Stretch"  Margin="5" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"></TextBox>
 
-            <Button Grid.Row="1"  Grid.Column="1" Content="Принять изменение" Margin="5" Padding="5,10,5,10" Command="{Binding AcceptChangingCommand}"  VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Blue" Background="#FFFAFDFF"  />
+            <Button Grid.Row="1"  Grid.Column="1" Content="Принять изменение" Margin="5" Padding="5,10,5,10" Command="{Binding AcceptChangingCommand, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Blue" Background="#FFFAFDFF"  />
         </Grid>
 
         <Grid Grid.Row="5" >

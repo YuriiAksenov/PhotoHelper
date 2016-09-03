@@ -16,26 +16,44 @@ namespace PhotoHelper.ViewModel
     {
         //TODO
         //Описать свой класс где в командах будут приниматься параметры от команд https://habrahabr.ru/post/196960/  https://msdn.microsoft.com/en-us/magazine/dn237302.aspx;
-
+       
         public ICommand AcceptChangingCommand { get; set; }
         public RenameInterfaceViewModel()
         {
             AcceptChangingCommand = new RelayCommand(this.AcceptChanging);
+            FileInfoComponents = new FileInfoComponents();
         }
 
+
+        public bool IsMovedAndRename
+        {
+            get { return (bool)GetValue(IsMovedAndRenameProperty); }
+            set { SetValue(IsMovedAndRenameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for IsMovedAndRename.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsMovedAndRenameProperty =
+            DependencyProperty.Register("IsMovedAndRename", typeof(bool), typeof(RenameInterfaceViewModel), new PropertyMetadata(false));
+
+
+        /// <summary>
+        /// Метод производит перемещение файла и его переименование сразу же.
+        /// </summary>
         private void AcceptChanging()
         {
             try
             {
-                Directory.Move(Path.Combine(PathControls.PathFrom,FileInfoComponents.FileOldName),Path.Combine(PathControls.PathTo,FileInfoComponents.CombineNewName()));
+                Directory.Move(Path.Combine(PathControls.PathFrom,FileInfoComponents.FileOldName),Path.Combine(PathControls.PathTo,NewName));
                 MessageNoticeUpdate = "Файл перемещён.";
                 MessageBox.Show("Файл перемещён.");
+                IsMovedAndRename = true;
 
             }
             catch(Exception e)
             {
+                IsMovedAndRename = false;
                 MessageBox.Show("Файл НЕ БЫЛ перемещён. Возникли проблемы. "+e.Message);
-                MessageNoticeUpdate = "Файл НЕ БЫЛ перемещён. Возникли проблемы.";
+                MessageNoticeUpdate = "Файл НЕ БЫЛ перемещён. Возникли проблемы. " + e.Message;
             }
             
         }
@@ -94,23 +112,25 @@ namespace PhotoHelper.ViewModel
             var t = d as RenameInterfaceViewModel;
             if(t !=null)
             {
-                var filenames = Directory.GetFiles(PathControls.PathFrom,PathControls.Filter,PathControls.SearchOption);
-
                 bool foundname = false;
-                foreach(var filename in filenames)
+                if (!string.IsNullOrWhiteSpace(PathControls.PathFrom))
                 {
-                    //TODO
-                    //Изменить длину на варьируемую величину
-                    if(filename.Contains(t.FileId) && t.FileId.Length==filename.MaxDigitCount() && !string.IsNullOrWhiteSpace(t.FileId))
+                    var filenames = Directory.GetFiles(PathControls.PathFrom, PathControls.Filter, PathControls.SearchOption);
+                    foreach (var filename in filenames)
                     {
-                        foundname = true;
-                        
-                        t.FileInfoComponents.Parsing(filename);
+                        //TODO
+                        //Изменить длину на варьируемую величину
+                        if (filename.Contains(t.FileId) && t.FileId.Length == filename.MaxDigitCount() && !string.IsNullOrWhiteSpace(t.FileId))
+                        {
+                            foundname = true;
 
-                        t.NewName = null;
-                        t.NewName = t.FileInfoComponents.CombineNewName();
+                            t.FileInfoComponents.Parsing(filename);
 
-                        break;
+                            t.NewName = null;
+                            t.NewName = t.FileInfoComponents.CombineNewName();
+
+                            break;
+                        }
                     }
                 }
                 if(foundname)

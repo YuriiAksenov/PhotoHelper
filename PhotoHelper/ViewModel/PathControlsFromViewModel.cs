@@ -18,7 +18,7 @@ namespace PhotoHelper.ViewModel
 {
     public class PathControlsFromViewModel:DependencyObject
     {
-        public RenameInterfaceViewModel RenameInterfaceViewModel { get; set; }
+        //public RenameInterfaceViewModel RenameInterfaceViewModel { get; set; }
 
         public ICommand OpenFolderDialogCommand { get; set; }
                
@@ -28,6 +28,24 @@ namespace PhotoHelper.ViewModel
             OpenFolderDialogCommand = new RelayCommand(this.OpenFolderDialog);
         }
 
+
+
+
+
+        public RenameInterfaceViewModel RenameInterfaceViewModel
+        {
+            get { return (RenameInterfaceViewModel)GetValue(RenameInterfaceViewModelProperty); }
+            set { SetValue(RenameInterfaceViewModelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RenameInterfaceViewModel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RenameInterfaceViewModelProperty =
+            DependencyProperty.Register("RenameInterfaceViewModel", typeof(RenameInterfaceViewModel), typeof(PathControlsFromViewModel), new PropertyMetadata(null, RenameInterfaceViewModel_Changed));
+
+        private static void RenameInterfaceViewModel_Changed(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            MessageBox.Show("Произошло изменение !!!");
+        }
 
         public ForCollectionItems SelectedFile
         {

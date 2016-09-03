@@ -23,9 +23,10 @@ namespace PhotoHelper.ViewModel
         public PathControlsToViewModel(RenameInterfaceViewModel renameInterfaceViewModel)
         {
             RenameInterfaceViewModel = renameInterfaceViewModel;
+            
             OpenFolderDialogCommand = new RelayCommand(this.OpenFolderDialog);
         }
-
+        
         public string FolderPath
         {
             get { return (string)GetValue(FolderPathProperty); }
